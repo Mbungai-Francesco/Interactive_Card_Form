@@ -1,2 +1,89 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: "Space Grotesk", sans-serif;
+}
+body{
+  height: 100vh;
+  background-image: url(./images/bg-main-desktop.png);
+  background-repeat: no-repeat;
+  background-color: hsl(270, 6%, 94%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+main{
+  margin: auto;
+  width: 80%;
+  height: 70vh;
+  display: flex;
+  justify-content: space-between;
+  /* background-color: azure; */
+}
+.left{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 45%;
+  padding: 0 3em;
+}
+.card{
+  width: 27em;
+}
+.card:nth-child(2){
+  align-self: flex-end;
+}
+form{
+  width: 35%;
+  padding: 5em 0em;
+}
+label p{
+  font-size: 15px;
+  margin: 5px 0;
+}
+.above label{
+  margin: 0 1em;
+}
+input{
+  padding: 0.7em;
+  border: 0.5px solid hsl(283, 5%, 73%);
+  border-radius: 5px;
+  background-color: transparent;
+  font-size: 18px;
+}
+.above label input{
+  width: 92%;  
+}
+.below{
+  padding: 1em 0;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.below .dates{
+  width: 45%;
+  
+}
+.below .dates input{
+  width: 30%;
+}
+.below .dates p{
+  font-size: 15px;
+  margin: 5px 0;
+  display: block;
+}
+.nums{
+  display: flex;
+  justify-content: space-between;
+}
+.below label{
+  width: 40%;
+  align-self: flex-end;
+}
+.below label input{
+  width: 80%;
+}
+
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }
