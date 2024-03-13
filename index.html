@@ -16,8 +16,22 @@
 <body>
   <main>
     <div class="left">
-      <img src="./images/bg-card-front.png" alt="" class="card">
-      <img src="./images/bg-card-back.png" alt="" class="card">
+      <div class="front card">
+        <div class="top">
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+        <div class="writing">
+          <p id="card_num"> <span>0000</span> <span>0000</span> <span>0000</span> <span>0000</span> </p>
+          <div class="base">
+            <p id="name">Jane Appleseed</p>
+            <p id="base_date">00/00</p>
+          </div>
+        </div>
+      </div>
+      <div class="back card">
+        <p id="cvc">000</p>
+      </div>
     </div>
     <form action="">
       <div class="above">
@@ -27,14 +41,14 @@
         </label>
         <label for="">
           <p>CARD NUMBER</p>
-          <input type="text" name="" id="" placeholder="e.g. 1234 5678 9123 0000">
+          <input type="number" name="" id="" placeholder="e.g. 1234 5678 9123 0000">
         </label>
       </div>
       <div class="below">
         <div class="dates">
           <p>EXP. DATE (MM/YY)</p>
           <div class="nums">
-            <input type="number" name="" id="" placeholder="MM">
+            <input type="number" name="" id="" placeholder="MM" min="1" max="12">
             <input type="number" name="" id="" placeholder="YY">
           </div>
         </div>
@@ -43,7 +57,7 @@
           <input type="number" name="" id="" placeholder="e.g. 123">
         </label>
       </div>
-      <button type="submit">Confirm</button>
+      <button type="button">Confirm</button>
     </form>
   </main>
 </body>
