@@ -116,6 +116,10 @@ input{
 .above label input{
   width: 92%;  
 }
+#error{
+  color: red;
+  display: none;
+}
 .below{
   padding: 1em 0;
   display: flex;
