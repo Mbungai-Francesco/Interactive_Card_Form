@@ -3,7 +3,9 @@ const nums = document.querySelectorAll('.nums input')
 const cvc = document.querySelector('.below label input')
 const err = document.querySelector('#error')
 const err2 = document.querySelector('#error2')
+const err3 = document.querySelector('#error3')
 const label = document.querySelector('.below label')
+const gray = 'hsl(283, 5%, 73%)'
 
 const card_cvc = document.querySelector('#cvc')
 const card_name = document.querySelector('#name')
@@ -24,6 +26,7 @@ names[1].addEventListener('focusout', function (){
 var take,taker
 names[1].addEventListener('keyup', function (e){
   if(names[1].value.length <= 16){
+    names[1].style.borderColor = gray
     err.style.display = 'none'
     take = names[1].value
     taker = ''
@@ -36,16 +39,30 @@ names[1].addEventListener('keyup', function (e){
     }
     document.querySelector('#card_num').textContent = taker
   }
-  else err.style.display = 'block'
+  else {
+    err.style.display = 'block'
+    names[1].style.borderColor = 'red'
+  }
 })
 
-const err2Block = () =>{
-  err2.style.display = 'block'
-  label.style.alignSelf = 'flex-start'
+const errBlock = (...ele) =>{
+  ele[0].style.display = 'block'
+  ele[1].style.alignSelf = 'flex-start'
+  ele[2].style.borderColor = 'red'
 }
-const err2none = () =>{
-  err2.style.display = 'none'
-  label.style.alignSelf = 'flex-end'
+const errNone = (...ele) =>{
+  ele[0].style.display = 'none'
+  ele[1].style.alignSelf = 'flex-end'
+  ele[2].style.borderColor = gray
+}
+const checkDate = (m,y) =>{
+  console.log(typeof m)
+  // var date = moment(`20${y}-0${m}`);
+  // console.log(date)
+  date = new Date(`20${y}-0${m}`)
+  console.log(date)
+  if (isNaN(date.getTime()) || date.getTime() < 0) return false
+  else return true
 }
 
 nums[0].addEventListener('focusout', function (){
@@ -53,22 +70,23 @@ nums[0].addEventListener('focusout', function (){
 })
 nums[0].addEventListener('keyup', function (e){
   if(nums[0].value.length <= 2){
-    err2none()
+    errNone(err2,label,nums[0])
     document.querySelectorAll('#base_date span')[0].textContent = nums[0].value
     console.log(nums[0].value)
   }
-  else err2Block()
+  else errBlock(err2,label,nums[0])
 })
 nums[1].addEventListener('focusout', function (){
   if(nums[1].value.length == 0) document.querySelectorAll('#base_date span')[1].textContent = '00'
+  else if(! checkDate(nums[0].value,nums[1].value)) errBlock(err3,label,nums[1])
 })
 nums[1].addEventListener('keyup', function (e){
   if(nums[1].value.length <= 2){
-    err2none()
+    errNone(err2,label,nums[1])
     document.querySelectorAll('#base_date span')[1].textContent = nums[1].value
     console.log(nums[1].value)
   }
-  else err2Block()
+  else errBlock(err2,label,nums[1])
 })
 
 cvc.addEventListener('focusout', function (){
@@ -76,10 +94,12 @@ cvc.addEventListener('focusout', function (){
 })
 cvc.addEventListener('keyup', function (e){
   if(cvc.value.length <= 3){
-    err2none()
+    errNone(err2,label,cvc)
     document.querySelector('#cvc').textContent = cvc.value
     console.log(cvc.value)
   }
-  else err2Block()
+  else errBlock(err2,label,cvc)
 })
 console.log('loop')
+
+console.log(moment(`19${11}-0${5}`))

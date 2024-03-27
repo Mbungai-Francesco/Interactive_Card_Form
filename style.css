@@ -12,6 +12,9 @@ body{
   flex-direction: column;
   justify-content: space-around;
 }
+input{
+  outline: none;
+}
 main{
   margin: auto;
   width: 80%;
@@ -116,7 +119,7 @@ input{
 .above label input{
   width: 92%;  
 }
-#error{
+#error,#error3,#error2{
   color: red;
   display: none;
 }
@@ -141,10 +144,6 @@ input{
 .nums{
   display: flex;
   justify-content: space-between;
-}
-#error2{
-  display: none;
-  color: red;
 }
 .below label{
   width: 40%;
