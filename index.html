@@ -42,7 +42,7 @@
         </label>
         <label for="">
           <p>CARD NUMBER</p>
-          <input type="number" name="" id="" placeholder="e.g. 1234 5678 9123 0000">
+          <input type="text" name="" id="" placeholder="e.g. 1234 5678 9123 0000" maxlength="16" pattern="[0-9]{16}">
           <p id="error">Exiding number of inputs</p>
         </label>
       </div>
@@ -50,15 +50,15 @@
         <div class="dates">
           <p>EXP. DATE (MM/YY)</p>
           <div class="nums">
-            <input type="number" name="" id="" placeholder="MM" min="1" max="12">
-            <input type="number" name="" id="" placeholder="YY">
+            <input type="text" name="" id="" placeholder="MM" maxlength="2">
+            <input type="text" name="" id="" placeholder="YY" maxlength="2">
           </div>
         <p id="error2">Exiding number of inputs</p>
         <p id="error3">Invalid date</p>
         </div>
         <label for="">
           <p>CVC</p>
-          <input type="number" name="" id="" placeholder="e.g. 123">
+          <input type="text" name="" id="" placeholder="e.g. 123" maxlength="3">
         </label>
       </div>
       <button type="button">Confirm</button>
