@@ -21,16 +21,14 @@ main{
   height: 70vh;
   display: flex;
   justify-content: space-between;
-  /* background-color: azure; */
 }
-p{
+/* p{
   font-variant: small-caps;
-}
+} */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-/* display: none; <- Crashes Chrome on hover */
 -webkit-appearance: none;
-margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+margin: 0;
 }
 .left{
   height: 100%;
@@ -86,6 +84,9 @@ margin: 0; /* <-- Apparently some margin are still there even though it's hidden
   display: flex;
   justify-content: space-between;
 }
+#name{
+  text-transform: uppercase;
+}
 .back{
   background-image: url(./images/bg-card-back.png);
   background-repeat: no-repeat;
@@ -119,7 +120,7 @@ input{
 .above label input{
   width: 92%;  
 }
-#error,#error3,#error2{
+#error0,#error,#error3,#error2{
   color: red;
   display: none;
 }
@@ -152,7 +153,7 @@ input{
 .below label input{
   width: 80%;
 }
-button{
+input[type=button]{
   margin: 1em 0;
   color: white;
   width: 100%;
@@ -162,8 +163,27 @@ button{
   border-radius: 5px;
   background-color: hsl(278, 68%, 11%);
 }
-button:hover{
+input[type=button]:hover{
   background-color: hsl(278, 94%, 27%);
+}
+.thanks{
+  align-self: center;
+  height: fit-content;
+  width: 35%;
+  text-align: center;
+  display: none;
+}
+.thanks svg{
+  margin: 2em 0;
+}
+svg + p{
+  font-size: 1.5em;
+  font-weight: 500;
+  margin-bottom: .5em;
+}
+svg + p + p{
+  color: hsl(276, 2%, 57%);
+  margin-bottom: 1em;
 }
 
 .attribution { font-size: 11px; text-align: center; }

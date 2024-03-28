@@ -1,6 +1,10 @@
+const form = document.querySelector('form')
+const thanks = document.querySelector('.thanks')
+const labels = document.querySelectorAll('.above label')
 const names = document.querySelectorAll('.above input')
 const nums = document.querySelectorAll('.nums input')
 const cvc = document.querySelector('.below label input')
+const err0 = document.querySelector('#error0')
 const err = document.querySelector('#error')
 const err2 = document.querySelector('#error2')
 const err3 = document.querySelector('#error3')
@@ -16,11 +20,14 @@ const errBlock = (...ele) =>{
   ele[0].style.display = 'block'
   ele[1].style.alignSelf = 'flex-start'
   ele[2].style.borderColor = 'red'
+  // console.log(ele.length);
+  if(ele.length == 4) ele[3].style.borderColor = 'red'
 }
 const errNone = (...ele) =>{
   ele[0].style.display = 'none'
   ele[1].style.alignSelf = 'flex-end'
   ele[2].style.borderColor = gray
+  if(ele.length == 4) ele[3].style.borderColor = gray
 }
 const checkDate = (m,y) =>{
   console.log(typeof m)
@@ -39,12 +46,60 @@ const  formatCardNumber = (input) => {
   return formatted;
 }
 
+const submits = () =>{
+  var trues = []
+  trues.push(true)
+  console.log('lop')
+  if(names[0].value.length == 0){
+    err0.style.display = 'block'
+    trues[0] = false
+  }
+  if(names[1].value.length == 0 || names[1].value.length < 16){
+    names[1].style.borderColor = 'red'
+    err.style.display = 'block'
+    trues.push(false)
+  }
+  else{
+    names[1].style.borderColor = gray
+    err.style.display = 'none'
+    trues.push(true)
+  }
+  if(! checkDate(nums[0].value,nums[1].value)) {
+    errBlock(err3,label,nums[0],nums[1])
+    trues.push(false)
+  }
+  else {
+    trues.push(true)
+    errNone(err3,label,nums[0],nums[1])
+  }
+  if(cvc.value.length == 0 || cvc.value.length < 3) {
+    trues.push(false)
+    errBlock(err3,label,cvc)
+  }
+  else {
+    trues.push(true)
+    errNone(err3,label,cvc)
+  }
+  console.log(trues.length)
+  trues.forEach(element => {
+    console.log(element)
+  });
+  if(trues[0]==true && trues[1]==true && trues[2]==true && trues[3]==true){
+    form.style.display = 'none'
+    thanks.style.display = 'block'
+  }
+  // if(nums[0].value.length == 0 || nums[1].value.length == 0 || cvc.value.length == 0){
+  //   errBlock
+  // }
+}
+
 names[0].addEventListener('focusout', function (){
   if(names[0].value.length == 0) document.querySelector('#name').textContent = 'Jane Appleseed'
 })
 names[0].addEventListener('keyup', function (e){
   document.querySelector('#name').textContent = names[0].value
-  console.log(names[0].value)
+  err0.style.display = 'none'
+  // console.log(names[0].value)
 })
 
 names[1].addEventListener('focusout', function (){
@@ -52,24 +107,17 @@ names[1].addEventListener('focusout', function (){
 })
 var take,taker
 names[1].addEventListener('keyup', function (e){
-  if(names[1].value.length <= 16){
-    names[1].style.borderColor = gray
-    err.style.display = 'none'
+  if(names[1].value.length <= 16 || e.key == 'Backspace'){
     take = names[1].value
     taker = ''
     for (let i = 0; i < take.length; i++) {
       taker += take[i]
-      console.log(taker)
       if((i+1)%4 == 0){
         taker += " "
       }
     }
     document.querySelector('#card_num').textContent = taker
-    // names[1].value = formatCardNumber(names[1])
-  }
-  else {
-    err.style.display = 'block'
-    names[1].style.borderColor = 'red'
+    names[1].value = formatCardNumber(names[1])
   }
 })
 
@@ -77,40 +125,24 @@ nums[0].addEventListener('focusout', function (){
   if(nums[0].value.length == 0) document.querySelectorAll('#base_date span')[0].textContent = '00'
 })
 nums[0].addEventListener('keyup', function (e){
-  if(nums[0].value.length <= 2){
-    errNone(err2,label,nums[0])
-    document.querySelectorAll('#base_date span')[0].textContent = nums[0].value
-    nums[0].value = formatCardNumber(nums[0])
-    console.log(nums[0].value)
-  }
-  else errBlock(err2,label,nums[0])
+  document.querySelectorAll('#base_date span')[0].textContent = nums[0].value
+  nums[0].value = formatCardNumber(nums[0])
 })
+
 nums[1].addEventListener('focusout', function (){
   if(nums[1].value.length == 0) document.querySelectorAll('#base_date span')[1].textContent = '00'
-  else if(! checkDate(nums[0].value,nums[1].value)) errBlock(err3,label,nums[1])
 })
 nums[1].addEventListener('keyup', function (e){
-  if(nums[1].value.length <= 2){
-    errNone(err2,label,nums[1])
-    document.querySelectorAll('#base_date span')[1].textContent = nums[1].value
-    nums[1].value = formatCardNumber(nums[1])
-    console.log(nums[1].value)
-  }
-  else errBlock(err2,label,nums[1])
+  // errNone(err2,label,nums[1])
+  document.querySelectorAll('#base_date span')[1].textContent = nums[1].value
+  nums[1].value = formatCardNumber(nums[1])
 })
 
 cvc.addEventListener('focusout', function (){
   if(cvc.value.length == 0) document.querySelector('#cvc').textContent = '000'
 })
 cvc.addEventListener('keyup', function (e){
-  if(cvc.value.length <= 3){
-    errNone(err2,label,cvc)
-    document.querySelector('#cvc').textContent = cvc.value
-    cvc.value = formatCardNumber(cvc)
-    console.log(cvc.value)
-  }
-  else errBlock(err2,label,cvc)
+  document.querySelector('#cvc').textContent = cvc.value
+  cvc.value = formatCardNumber(cvc)
+  // console.log(cvc.value)
 })
-console.log('loop')
-
-console.log(moment(`19${11}-0${5}`))
