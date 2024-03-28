@@ -276,6 +276,9 @@ svg + p + p{
     width: 80%;
     margin: auto;
   }
+  .thanks{
+    width: 60%;
+  }
 }
 @media (max-width: 600px){
   .backImg{
