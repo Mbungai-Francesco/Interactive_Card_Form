@@ -46,6 +46,9 @@ const  formatCardNumber = (input) => {
   return formatted;
 }
 
+const now = moment();
+console.log(now.format("YYYY"));
+
 const submits = () =>{
   var trues = []
   trues.push(true)
@@ -64,7 +67,9 @@ const submits = () =>{
     err.style.display = 'none'
     trues.push(true)
   }
-  if(! checkDate(nums[0].value,nums[1].value)) {
+  const future = eval(`${Number(now.format("YYYY"))} - 20${nums[1].value}`) <= 0 ? 0 : 1
+  console.log(`${future} future`)
+  if(! checkDate(nums[0].value,nums[1].value) || future ) {
     errBlock(err3,label,nums[0],nums[1])
     trues.push(false)
   }
